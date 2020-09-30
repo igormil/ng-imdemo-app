@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ng-imdemo-app"
+    }
+  },
+  "defaultProject": "ng-imdemo-app",
+  "cli": {
+    "analytics": "03f53f60-ec4c-432d-8cfb-54e83b97a54e"
+  }
 }
