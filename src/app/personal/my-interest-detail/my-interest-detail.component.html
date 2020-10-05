@@ -1,0 +1,16 @@
+<h2>My Interest Details</h2>
+
+<div *ngIf="hackerNewsItem" >
+  <h3>{{hackerNewsItem.title}}</h3>
+
+  <p>type: {{hackerNewsItem.type}}</p>
+  <p>score: {{hackerNewsItem.score}}</p>
+  <p>by: {{hackerNewsItem.by}}</p>
+
+  <div *ngIf="hackerNewsItem.url">
+    <p>url: <a href="{{hackerNewsItem.url}}"> {{hackerNewsItem.url}} </a> </p>
+  </div>
+  <div *ngIf="hackerNewsItem.text" [innerHTML]="hackerNewsItem.text"></div>
+
+</div>
+

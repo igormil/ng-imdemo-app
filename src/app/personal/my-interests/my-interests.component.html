@@ -1,0 +1,11 @@
+<h2>My Interests</h2>
+
+<h3>Best hacker news (10 titles)</h3>
+
+<mat-list role="list">
+  <mat-list-item *ngFor="let newsItem of hackerNewsItems">
+    <a routerLink="/personal/my-interests/{{newsItem.id}}">
+      <span>{{newsItem.title}}</span>
+    </a>
+  </mat-list-item>
+</mat-list>
