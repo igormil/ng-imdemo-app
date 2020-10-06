@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { HackerNewsService} from "../../hacker-news.service";
 import { HackerNewsItem} from "../../hacker-news-item";
+import { CounterService } from "../../counter.service";
 
 @Component({
   selector: 'app-my-interests',
@@ -14,6 +15,7 @@ export class MyInterestsComponent implements OnInit {
 
   constructor(
     private hackerNewsService: HackerNewsService,
+    private counterService: CounterService,
   ) { }
 
   getBestStories(): void {
@@ -24,6 +26,10 @@ export class MyInterestsComponent implements OnInit {
     for(let i = 0; i < 10; i++) {
       this.hackerNewsService.getDetails(ids[i]).subscribe(item => this.hackerNewsItems.push(item));
     }
+  }
+
+  titleClicked(id: number) {
+    this.counterService.clicked(id);
   }
 
   ngOnInit(): void {

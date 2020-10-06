@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Location} from '@angular/common';
 import {HackerNewsItem} from "../../hacker-news-item";
 import {HackerNewsService} from "../../hacker-news.service";
 import {ActivatedRoute} from "@angular/router";
@@ -15,6 +16,7 @@ export class MyInterestDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private hackerNewsService: HackerNewsService,
+    private location: Location,
   ) { }
 
   getDetails(): void {
@@ -24,6 +26,10 @@ export class MyInterestDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDetails();
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
 }

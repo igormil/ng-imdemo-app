@@ -4,7 +4,7 @@
 
 <mat-list role="list">
   <mat-list-item *ngFor="let newsItem of hackerNewsItems">
-    <a routerLink="/personal/my-interests/{{newsItem.id}}">
+    <a routerLink="/personal/my-interests/{{newsItem.id}}" (click)=titleClicked(+newsItem.id)>
       <span>{{newsItem.title}}</span>
     </a>
   </mat-list-item>

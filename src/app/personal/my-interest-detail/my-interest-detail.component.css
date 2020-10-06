@@ -1,0 +1,9 @@
+.interest-detail {
+  display: grid;
+  place-items: center;
+}
+
+.interest-card {
+  max-width: 680px;
+  margin: 25px;
+}

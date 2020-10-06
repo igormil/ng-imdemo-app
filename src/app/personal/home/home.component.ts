@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CounterService} from "../../counter.service";
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  interestClicks: number;
+
+  interestVisits: number;
+
+  constructor(
+    private counterService: CounterService
+  ) { }
 
   ngOnInit(): void {
+    this.counterService.clicks$.subscribe(clicks => this.interestClicks = clicks);
+    this.counterService.visits$.subscribe(visits => this.interestVisits = visits);
   }
 
 }

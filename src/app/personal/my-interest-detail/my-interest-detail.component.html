@@ -1,16 +1,15 @@
-<h2>My Interest Details</h2>
+<div class="interest-detail">
+  <mat-card *ngIf="hackerNewsItem" class="interest-card">
+    <mat-card-header>
+      <mat-card-title> {{hackerNewsItem.title}} </mat-card-title>
+      <mat-card-subtitle>{{hackerNewsItem.type}} by {{hackerNewsItem.by}} | score: {{hackerNewsItem.score}}</mat-card-subtitle>
+    </mat-card-header>
 
-<div *ngIf="hackerNewsItem" >
-  <h3>{{hackerNewsItem.title}}</h3>
+    <mat-card-content *ngIf="hackerNewsItem.text" [innerHTML]="hackerNewsItem.text"></mat-card-content>
 
-  <p>type: {{hackerNewsItem.type}}</p>
-  <p>score: {{hackerNewsItem.score}}</p>
-  <p>by: {{hackerNewsItem.by}}</p>
-
-  <div *ngIf="hackerNewsItem.url">
-    <p>url: <a href="{{hackerNewsItem.url}}"> {{hackerNewsItem.url}} </a> </p>
-  </div>
-  <div *ngIf="hackerNewsItem.text" [innerHTML]="hackerNewsItem.text"></div>
-
+    <mat-card-subtitle *ngIf="hackerNewsItem.url">
+      <a href="{{hackerNewsItem.url}}"> View full {{hackerNewsItem.type}} ... </a>
+    </mat-card-subtitle>
+    <button (click)="goBack()">go back</button>
+  </mat-card>
 </div>
-
