@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import { HackerNewsService} from "../../hacker-news.service";
 import { HackerNewsItem} from "../../hacker-news-item";
 import { CounterService } from "../../counter.service";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-my-interests',
   templateUrl: './my-interests.component.html',
   styleUrls: ['./my-interests.component.css']
 })
-export class MyInterestsComponent implements OnInit {
+export class MyInterestsComponent implements OnInit, OnDestroy {
+
+  private readonly ngUnsubscribe$: Subject<void> = new Subject<void>();
 
   hackerNewsItems: HackerNewsItem[] = [];
 
@@ -19,12 +23,12 @@ export class MyInterestsComponent implements OnInit {
   ) { }
 
   getBestStories(): void {
-    this.hackerNewsService.getBestStoriesIds().subscribe(hackerNewsIds => this.getDetails(hackerNewsIds));
+    this.hackerNewsService.getBestStoriesIds().pipe(takeUntil(this.ngUnsubscribe$)).subscribe(hackerNewsIds => this.getDetails(hackerNewsIds));
   }
 
   getDetails(ids: String[]): void {
     for(let i = 0; i < 10; i++) {
-      this.hackerNewsService.getDetails(ids[i]).subscribe(item => this.hackerNewsItems.push(item));
+      this.hackerNewsService.getDetails(ids[i]).pipe(takeUntil(this.ngUnsubscribe$)).subscribe(item => this.hackerNewsItems.push(item));
     }
   }
 
@@ -34,6 +38,11 @@ export class MyInterestsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBestStories();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next();
+    this.ngUnsubscribe$.unsubscribe();
   }
 
 }
